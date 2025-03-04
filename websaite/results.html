@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARK - Results</title>
+    <link rel="stylesheet" href="design.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SPARK</div>
+        <div class="nav-buttons">
+            <button onclick="myFunction()" class="nav-btn">Dark mode</button>
+            <button class="nav-btn">About Us</button>
+            <button class="nav-btn primary">Login</button>
+        </div>
+    </nav>
+
+    <main class="results-section">
+        <div class="results-container">
+            <div class="question-section">
+                <h2 class="question-title">Your Question</h2>
+                <p id="userQuestion" class="question-text"></p>
+            </div>
+            
+            <div class="answer-section">
+                <h2 class="answer-title">SPARK's Response</h2>
+                <div id="sparkResponse" class="response-text"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="submit-btn" onclick="window.location.href='website.html'">Ask Another Question</button>
+                <button class="submit-btn study-btn" onclick="generateStudyMaterial()">Generate Study Guide</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="function.js"></script>
+</body>
+</html>
