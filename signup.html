@@ -27,14 +27,22 @@
     </nav>
 
     <main class="hero-section">
-        <h1 class="login-title">Log In</h1>
-        <p class="subtitle-login">Welcome to SPARK</p>
+        <h1 class="login-title">Sign Up</h1>
+        <p class="subtitle-login">Fill up the following</p>
         <div class="search-container">
                 <div class="login-container">
+                    <input 
+                    id="inputid-email" 
+                    type="text" 
+                    placeholder="placeholder@domain.com" 
+                    class="email"
+                    autocomplete="off"
+                    aria-label="Question input"
+                >
                 <input 
                     id="inputid-user" 
                     type="text" 
-                    placeholder="username" 
+                    placeholder="username (must contain more than 6 letters)" 
                     class="username"
                     autocomplete="off"
                     aria-label="Question input"
@@ -42,32 +50,24 @@
                 <input 
                     id="inputid-pass" 
                     type="password" 
-                    placeholder="password" 
+                    placeholder="password (must have atleast one number)" 
                     class="password"
                     autocomplete="off"
                     aria-label="Question input"
                 >
                 </div>
         </div>
-           <div class="login-button-group">
+            <div class="button-group">
                 <button 
                     class="submit-btn" 
-                    onclick="login()"
+                    onclick="signup()"
                     aria-label="Submit question"
                 >
-                    Log In
+                    Sign In
                 </button>
-                <div class="divider"></div>
-                    <a href="signup.html">
-                        <button 
-                        class="submit-btn"
-                        aria-label="Submit"
-                        >
-                        Don't Have a Account?
-                            </button>
-                    </a>
-            </div>
-        <div id="alert" class="response-container"></div>
+                </div>
+
+                <br>
     </main>
 
     <footer class="footer">

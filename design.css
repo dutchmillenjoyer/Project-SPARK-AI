@@ -104,16 +104,6 @@ input:focus {
     outline: 1px;
 }
 
-.tw h1 {
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: .10em;
-    animation: typing 2s steps(20, end), blink-caret .75s step-end infinite;
-    border-right: .15em solid #24292e;
-}
-
-
 .alert {
     font-size: medium;
     color: #24292e;
@@ -203,13 +193,28 @@ input:focus {
         blink-caret .75s step-end infinite;
 }
 
+.login-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    margin-bottom: 1rem;  /* Reduced from 1rem */
+    line-height: 1.2;
+    color: #333;
+}
+
 .subtitle {
     font-size: clamp(1rem, 3vw, 1.5rem);
-    margin-bottom: 2rem;
     color: #666;
     opacity: 0;
     animation: fadeIn 0.5s ease-in forwards;
     animation-delay: 3.5s;  /* Start after typing animation */
+}
+
+.subtitle-login {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 1rem;
+    color: #666;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+    animation-delay: .5s;  /* Start after typing animation */
 }
 
 /* Add necessary animations */
@@ -223,7 +228,17 @@ input:focus {
     50% { border-color: #333 }
 }
 
+@keyframes blink-caretdrk {
+    from, to { border-color: transparent }
+    50% { border-color: #edf1f7 }
+}
+
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInLogin {
     from { opacity: 0; }
     to { opacity: 1; }
 }
@@ -250,8 +265,55 @@ input:focus {
     margin-bottom: 1rem;
     box-shadow: var(--shadow);
     padding-right: 60px;    /* Update search input padding for upload button */
+    align-items: center;
 }
 
+.username {
+    width: 100%;
+    padding: 1.5rem 2rem;    /* Increased padding */
+    font-size: 1.2rem;       /* Slightly larger font */
+    border: 2px solid #eee;
+    border-radius: 16px;     /* Increased border radius */
+    transition: all 0.3s ease;
+    height: 70px;           /* Increased height */
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.password {
+    width: 100%;
+    padding: 1.5rem 2rem;    /* Increased padding */
+    font-size: 1.2rem;       /* Slightly larger font */
+    border: 2px solid #eee;
+    border-radius: 16px;     /* Increased border radius */
+    transition: all 0.3s ease;
+    height: 70px;           /* Increased height */
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.email {
+    width: 100%;
+    padding: 1.5rem 2rem;    /* Increased padding */
+    font-size: 1.2rem;       /* Slightly larger font */
+    border: 2px solid #eee;
+    border-radius: 16px;     /* Increased border radius */
+    transition: all 0.3s ease;
+    height: 70px;           /* Increased height */
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.login-container {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 1000px;
+    min-height: 100px;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 /* Update input focus state */
 .search-input:focus {
     border-color: var(--primary-color);
@@ -395,7 +457,7 @@ input:focus {
 /* Dark mode styles */
 body.dark-mode {
     --bg-color: #1a1a1a;
-    --text-color: #ffffff;
+    --text-color: #f6f6f6;
 }
 
 body.dark-mode .navbar,
@@ -403,7 +465,32 @@ body.dark-mode .footer {
     background-color: #2d2d2d;
 }
 
+body.dark-mode .subtitle {
+    color: #eceded;
+}
+
+body.dark-mode .subtitle-login {
+    color: #eceded;
+    letter-spacing: 1px;
+}
+
+body.dark-mode .login-container {
+    background: #494848;
+}
+
+body.dark-mode .email,
+body.dark-mode .username,
+body.dark-mode .password{
+    border-color: #636363;
+    background-color: #d4d4d4;
+}
+
+body.dark-mode .blin {
+    color: #fff;
+}
+
 body.dark-mode .nav-btn {
+    background-color: #9a9a9a;
     color: #fff;
 }
 
@@ -419,13 +506,20 @@ body.dark-mode .response-container {
 }
 
 body.dark-mode .img-container {
-        filter: invert(100%) sepia(11%) saturate(6207%) hue-rotate(210deg) brightness(95%) contrast(94%);
+        filter: invert(65%) sepia(22%) saturate(6897%) hue-rotate(207deg) brightness(104%) contrast(97%);
 }
 
 /* Update dark mode for typewriter effect */
 body.dark-mode .main-title {
-    border-right-color: #fff;
-    color: #424549;
+    border-right-color: #f6f6f6;
+    color: #c0c0c0;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caretdrk .75s step-end infinite;
+}
+
+body.dark-mode .login-title {
+    color: #c0c0c0;
 }
 
 /* Update dark mode styles */
@@ -443,8 +537,8 @@ body.dark-mode .file-label {
 .input-wrapper {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
+    display: inline;
+    align-items: end;
 }
 
 .upload-btn {
@@ -474,6 +568,23 @@ body.dark-mode .file-label {
 .button-group {
     display: flex;
     gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.login-button-group{
+    display: flex;
+}
+
+.divider{
+    display: inline-block;
+    width: 30px;
+    height: auto;
+}
+
+.button-login {
+    display: inline-block;
     justify-content: center;
     width: 100%;
 }

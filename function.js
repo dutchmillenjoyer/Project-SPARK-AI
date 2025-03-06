@@ -1,6 +1,5 @@
 // Remove import statement since we're using script tags\
 let model;
-
 import { GenerativeModel, GoogleGenerativeAI } from "https://cdn.skypack.dev/@google/generative-ai";
 
 async function initializeAI() {
@@ -13,6 +12,7 @@ async function initializeAI() {
         alert("AI initialization failed. See console for details.");
     }
 }
+
 
 
 // Define functions before making them global
@@ -67,18 +67,16 @@ async function generateStudyMaterial() {
 
         // AI position (wag baguhin)
         const response = result.response.candidates[0].content.parts[0].text;
-        console.log(response);
-
 
         localStorage.setItem('userQuestion', `STUDY GUIDE: ${input.value}`.toUpperCase());
         localStorage.setItem('sparkResponse', response);
-
 
         window.location.href = 'results.html';
     } catch (error) {
         alert("Error generating study guide: " + error.message);
     }
 }
+
 
 // ninja mode
 function myFunction() {
@@ -110,27 +108,107 @@ function loadResults() {
 }
 
 // Initialize on load
-try{
-    document.addEventListener('DOMContentLoaded', async () => {
-        await initializeAI();
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-        }
-        loadResults();
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+    await initializeAI();
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    loadResults();
+});
 
-    // Make functions globally available
-    window.submit = submit;
-    window.generateStudyMaterial = generateStudyMaterial;
-    window.myFunction = myFunction;
+// function to read user in database
+function login() {
+    if (window.location.pathname.includes('login.html')) {
+    // put this in database
+    const username = document.getElementById('inputid-user').value;
+    const password = document.getElementById('inputid-pass').value;
+
+    if (!username.trim() || !password.trim()) {
+        alert("Please enter your username and password");
+        return;
+    }
+
+    // regular expression & constraint
+    const regUser = /^[a-zA-Z][a-zA-Z0-9_.]{5,25}$/;
+    const regPass = /^(?=.*[a-z])(?=.*\d)[a-zA-Z0-9@#$!%*?&]{8,128}$/;
+
+    // check if username and password are valid
+    const validUser = regUser.test(username);
+    const validPass = regPass.test(password);
+
+    console.log(validUser, validPass);
+
+    // if username and password are not valid
+    if (!validUser || !validPass) {
+        alert("Invalid username or password! Please try again.");
+        return;
+    }
+
+    console.log("Username: ", username);
+    console.log("Password: ", password);
+    }
 }
-catch (error) {
-    console.log("Error: " + error.message);
-    document.addEventListener('DOMContentLoaded', async () => {
-        await initializeAI();
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
+
+
+// function to write user in database
+function signup() {
+    if (window.location.pathname.includes('signup.html')) {
+        // put this in database
+        const email = document.getElementById('inputid-email').value;
+        const username = document.getElementById('inputid-user').value;
+        const password = document.getElementById('inputid-pass').value;
+    
+        if (!username.trim() || !password.trim()) {
+            alert("Please enter your email, username, and password");
+            return;
         }
-        loadResults();
-    });
+    
+        // regular expression & constraint
+        const regEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        const regUser = /^[a-zA-Z][a-zA-Z0-9_.]{5,25}$/;
+        const regPass = /^(?=.*[a-z])(?=.*\d)[a-zA-Z0-9@#$!%*?&]{8,128}$/;
+    
+        // check if username and password are valid
+        const validEmail = regEmail.test(email);
+        const validUser = regUser.test(username);
+        const validPass = regPass.test(password);
+    
+    
+        // if username and password are not valid
+        const errorArr = {};
+        
+        // check if which one is invalid
+        if(!validEmail){
+            errorArr.email = 'Invalid email: ' + email;
+        }
+
+        if (!validUser){
+            errorArr.username = 'Invalid username: ' + username;
+        }
+
+        if (!validPass){
+            errorArr.password = 'Invalid password: ' + password;
+        }
+
+        // if there are errors or none
+        if (Object.values(errorArr).length > 0){
+        const values = Object.values(errorArr);
+
+        alert(values.join("\n"));
+        return;
+        }
+
+        console.log("Email: ", email);
+        console.log("Username: ", username);
+        console.log("Password: ", password);
+        }
+        window.location.href = 'login.html';
+        
 }
+
+// Make functions globally available
+window.login = login;
+window.signup = signup;
+window.submit = submit;
+window.generateStudyMaterial = generateStudyMaterial;
+window.myFunction = myFunction;
