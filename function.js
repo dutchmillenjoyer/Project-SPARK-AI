@@ -5,7 +5,10 @@ import { GenerativeModel, GoogleGenerativeAI } from "https://cdn.skypack.dev/@go
 async function initializeAI() {
     try {
     const genAI = new GoogleGenerativeAI( "AIzaSyD0LVIthyXuQpepTWt2eOhPxGTKAS6ET2g" );
-    model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    model = genAI.getGenerativeModel({ 
+        model: "gemini-2.0-flash",
+        systemInstruction: "You are a study companion named SPARK, You were made by the research group KFA from Grade 12 - Flores, and you aim to help students by making study guides and reviewers."
+    });
         console.log("AI initialized successfully");
     } catch (error) {
         console.error("AI initialization failed:", error);
@@ -78,7 +81,7 @@ async function generateStudyMaterial() {
 }
 
 
-// ninja mode
+// Dark mode
 function myFunction() {
     try{
     document.body.classList.toggle('dark-mode');

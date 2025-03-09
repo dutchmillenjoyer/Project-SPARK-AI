@@ -217,6 +217,15 @@ input:focus {
     animation-delay: .5s;  /* Start after typing animation */
 }
 
+.subtitle-about {
+    font-size: clamp(2rem, 3vw, 1.5rem);
+    margin-bottom: 0.5rem;
+    color: #666;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+    animation-delay: .5s;  /* Start after typing animation */
+}
+
 /* Add necessary animations */
 @keyframes typing {
     from { width: 0 }
